@@ -22,7 +22,18 @@ public class ProductoController : Controller
     {
         return View(productoRepository.ListarProductos());
     }
+    [HttpGet]
+    public IActionResult CrearProducto()
+    {
+        return View();
+    }
 
+    [HttpPost]
+    public IActionResult CrearProducto(Producto producto)
+    {
+        productoRepository.CrearNuevo(producto);
+        return RedirectToAction("Index");
+    }    
     public IActionResult Privacy()
     {
         return View();
