@@ -2,6 +2,28 @@
     ViewData["Title"] = "Producto";
 }
 
+
+@model List<espacioProducto.Producto> 
+
 <div class="text-center">
-    <h1 class="display-4">Esto es producto</h1>
+    <h1 class="display-4">Listado de productos</h1>
 </div>
+<table class="table table-primary table-striped">
+    <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Descripcion</th>
+      <th scope="col">Precio</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach(var producto in Model)
+    {
+        <tr>
+            <th scope="row">@producto.IdProducto</th>
+            <td>@producto.Descripcion</td>
+            <td>@producto.Precio</td>
+        </tr>
+    }
+  </tbody>
+</table>

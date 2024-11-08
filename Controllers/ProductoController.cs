@@ -1,5 +1,8 @@
 using System.Diagnostics;
+using espacioProducto;
+using espacioProductoRepository;
 using Microsoft.AspNetCore.Mvc;
+using SQLitePCL;
 using tl2_tp6_2024_GonzaSanPla.Models;
 
 namespace tl2_tp6_2024_GonzaSanPla.Controllers;
@@ -7,15 +10,17 @@ namespace tl2_tp6_2024_GonzaSanPla.Controllers;
 public class ProductoController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    ProductoRepository productoRepository= new ProductoRepository();
 
     public ProductoController(ILogger<HomeController> logger)
     {
         _logger = logger;
     }
 
-    public IActionResult Index()
+    [HttpGet]
+    public ActionResult<List<Producto>> Index()
     {
-        return View();
+        return View(productoRepository.ListarProductos());
     }
 
     public IActionResult Privacy()
