@@ -1,15 +1,15 @@
 @{
-    ViewData["Title"] = "CrearProducto";
+    ViewData["Title"] = "ModificarProducto";
 }
 
 @model espacioProducto.Producto
 
-<form asp-controller="Producto" asp-action="CrearProducto">
+<form asp-controller="Producto" asp-action="ModificarProducto">
   <div class="mb-3">
     <label asp-for=@Model.Descripcion class="form-label">Descipcion</label>
     <input asp-for=@Model.Descripcion type="text" class="form-control">
     <label asp-for=@Model.Precio class="form-label">Precio</label>
     <input asp-for=@Model.Precio type="number" class="form-control">
   </div>    
-  <button type="submit" class="btn btn-outline-success">Crear</button>
+  <button type="submit" class="btn btn-outline-success">Actualizar</button>
 </form>

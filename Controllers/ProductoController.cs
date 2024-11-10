@@ -33,7 +33,20 @@ public class ProductoController : Controller
     {
         productoRepository.CrearNuevo(producto);
         return RedirectToAction("Index");
-    }    
+    }
+    [HttpGet]
+    public IActionResult ModificarProducto(int id)
+    {
+        return View(productoRepository.ObtenerProductoPorId(id));
+    }
+
+    [HttpPost]
+    public IActionResult ModificarProducto(int id,Producto producto)
+    {
+        productoRepository.ModificarProducto(id,producto);
+        return RedirectToAction("Index");
+    }
+
     public IActionResult Privacy()
     {
         return View();

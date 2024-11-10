@@ -14,6 +14,7 @@
       <th scope="col">ID</th>
       <th scope="col">Descripcion</th>
       <th scope="col">Precio</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -23,10 +24,11 @@
             <th scope="row">@producto.IdProducto</th>
             <td>@producto.Descripcion</td>
             <td>@producto.Precio</td>
+            <td><button type="sumbit" class="btn btn-primary"><a   class="nav-link text-light" asp-area="" asp-controller="Producto" asp-action="ModificarProducto" asp-route-id="@producto.IdProducto">Modificar</a></button></td>
         </tr>
     }
   </tbody>
 </table>
 <div class="text-center">
-    <button type="button" class="btn btn-outline-success"><a class="nav-link text-dark" asp-area="" asp-controller="Producto" asp-action="CrearProducto">Crear</a></button>
+    <button type="button" class="btn btn-success"><a   class="nav-link text-light" asp-area="" asp-controller="Producto" asp-action="CrearProducto">Agregar producto a la lista</a></button>
 </div>
