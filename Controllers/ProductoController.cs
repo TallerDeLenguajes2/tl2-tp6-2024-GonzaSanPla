@@ -10,7 +10,7 @@ namespace tl2_tp6_2024_GonzaSanPla.Controllers;
 public class ProductoController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-    ProductoRepository productoRepository= new ProductoRepository();
+    ProductoRepository productoRepository = new ProductoRepository();
 
     public ProductoController(ILogger<HomeController> logger)
     {
@@ -41,11 +41,37 @@ public class ProductoController : Controller
     }
 
     [HttpPost]
-    public IActionResult ModificarProducto(int id,Producto producto)
+    public IActionResult ModificarProducto(int id, Producto producto)
     {
-        productoRepository.ModificarProducto(id,producto);
+        productoRepository.ModificarProducto(id, producto);
         return RedirectToAction("Index");
     }
+
+    [HttpGet]
+    public IActionResult EliminarProducto(int id)
+    {
+        return View(productoRepository.ObtenerProductoPorId(id));
+    }
+
+
+    // [HttpGet]
+    // public IActionResult EliminarProducto(int id,bool confirmar)
+    // {
+    //     if(confirmar)
+    //     {
+    //         productoRepository.EliminarProducto(id);
+    //     }
+    //     return RedirectToAction("Index");
+    // }
+
+
+    // [HttpPost] No va Post porque recibe objeto formulario nomas
+    public IActionResult ConfirmarEliminacion(int id)
+    {
+        productoRepository.EliminarProducto(id);
+        return RedirectToAction("Index");
+    }
+
 
     public IActionResult Privacy()
     {

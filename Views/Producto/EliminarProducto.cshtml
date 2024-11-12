@@ -1,0 +1,29 @@
+@{
+  ViewData["Title"] = "EliminarProducto";
+  
+}
+
+@model espacioProducto.Producto
+
+<div class="text-center">
+  <h2>¿Seguro que desea eliminar el siguiente producto?</h2>
+</div>
+<table class="table table-danger table-striped">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Descripcion</th>
+      <th scope="col">Precio</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">@Model.IdProducto</th>
+      <td>@Model.Descripcion</td>
+      <td>@Model.Precio</td>
+    </tr>
+  </tbody>
+</table>
+
+<button type="button" class="btn btn-success"><a class="nav-link text-light" asp-area="" asp-controller="Producto" asp-action="ConfirmarEliminacion" asp-route-id="@Model.IdProducto" >Confirmar</a></button> @*Se pude utilizar solo uno?*@
+<button type="button" class="btn btn-danger"><a class="nav-link text-light" asp-area="" asp-controller="Producto" asp-action="Index">Denegar</a></button>

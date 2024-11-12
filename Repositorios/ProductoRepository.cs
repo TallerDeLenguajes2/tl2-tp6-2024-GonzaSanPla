@@ -81,14 +81,19 @@ public class ProductoRepository
         }
         return prod;
     }
-    public void EliminarProducto(int idModificar)
+    public void EliminarProducto(int idEliminar)
     {
         using (SqliteConnection connection = new SqliteConnection(cadenaConexion))
         {
-            var query = "DELETE FROM Productos WHERE idProducto=@id ";
+            string query = "SELECT * FROM PresupuestosDetalle WHERE idPresupuesto=@idPres"; //Para eliminar de presupuesto detalle y no quede el id vacio
             connection.Open();
             var command = new SqliteCommand(query, connection);
-            command.Parameters.Add(new SqliteParameter("@id", idModificar));
+            command.Parameters.Add(new SqliteParameter("@id", idEliminar));
+            command.ExecuteNonQuery();
+            query = "DELETE FROM Productos WHERE idProducto=@id";   //Para eliminar el producto
+            connection.Open();
+            command = new SqliteCommand(query, connection);
+            command.Parameters.Add(new SqliteParameter("@id", idEliminar));
             command.ExecuteNonQuery();
             connection.Close();
         }
