@@ -85,7 +85,7 @@ public class ProductoRepository
     {
         using (SqliteConnection connection = new SqliteConnection(cadenaConexion))
         {
-            string query = "SELECT * FROM PresupuestosDetalle WHERE idPresupuesto=@idPres"; //Para eliminar de presupuesto detalle y no quede el id vacio
+            string query = "SELECT * FROM PresupuestosDetalle WHERE idPresupuesto=@id"; //Para eliminar de presupuesto detalle y no quede el id vacio
             connection.Open();
             var command = new SqliteCommand(query, connection);
             command.Parameters.Add(new SqliteParameter("@id", idEliminar));
