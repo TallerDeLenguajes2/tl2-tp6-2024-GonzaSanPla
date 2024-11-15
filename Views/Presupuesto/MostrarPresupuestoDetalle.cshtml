@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "MostrarPresupuestoDetalle";
+}
+
+
+@model List<espacioPresupuestosDetalle.PresupuestoDetalle> 
+
+<div class="text-center">
+    <h1 class="display-4">Listado de presupuesto detalle de Producto</h1>
+</div>
+<table class="table table-primary table-striped">
+    <thead>
+    <tr>
+      <th scope="col">ID Producto</th>
+      <th scope="col">Descripcion</th>
+      <th scope="col">Precio</th>
+      <th scope="col">Cantidad</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach(var presupuestoDetalle in Model)
+    {
+        <tr>
+            <th scope="row">@presupuestoDetalle.Producto.IdProducto</th>
+            <td>@presupuestoDetalle.Producto.Descripcion</td>
+            <td>@presupuestoDetalle.Producto.Precio</td>
+            <td>@presupuestoDetalle.Cantidad</td>
+            @* <td><button type="button" class="btn btn-primary"><a class="nav-link text-light" asp-area="" asp-controller="Producto" asp-action="ModificarProducto" asp-route-id="@producto.IdProducto">Modificar</a></button></td>
+            <td><button type="button" class="btn btn-danger"><a class="nav-link text-light" asp-area="" asp-controller="Producto" asp-action="EliminarProducto" asp-route-id="@producto.IdProducto">Eliminar</a></button></td> *@
+        </tr>
+    }
+  </tbody>
+</table>
+@* <div class="text-center">
+    <button type="button" class="btn btn-success"><a   class="nav-link text-light" asp-area="" asp-controller="Producto" asp-action="CrearProducto">Agregar producto a la lista</a></button>
+</div> *@

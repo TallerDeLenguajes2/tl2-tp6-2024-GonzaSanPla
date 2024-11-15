@@ -11,7 +11,6 @@ public class PresupuestoDetalle
     public int Cantidad { get => cantidad; set => cantidad = value; }
     public PresupuestoDetalle()
     {
-
     }
     
     public void CargarProducto(Producto nuevoProducto)

@@ -67,7 +67,7 @@ public class PresupuestoRepository
         List<PresupuestoDetalle> listaDetalle = new List<PresupuestoDetalle>();
         using (SqliteConnection connection = new SqliteConnection(cadenaConexion))
         {
-            string query = "SELECT * FROM PresupuestosDetalle WHERE idPresupuesto=@idPres";
+            string query = "SELECT * FROM PresupuestosDetalle INNER JOIN Productos USING(idProducto) WHERE  idPresupuesto=@idPres";
             SqliteCommand command = new SqliteCommand(query, connection);
             connection.Open();
             command.Parameters.Add(new SqliteParameter("@idPres", idPresupuesto));
@@ -75,10 +75,14 @@ public class PresupuestoRepository
             {
                 while (reader.Read())
                 {
+                    Producto producto= new Producto();  
                     var presupuestoDetalle = new PresupuestoDetalle();
                     var productoRepository= new ProductoRepository();
                     presupuestoDetalle.Cantidad= Convert.ToInt32(reader["Cantidad"]);
-                    presupuestoDetalle.CargarProducto(productoRepository.ObtenerProductoPorId(Convert.ToInt32(reader["idProducto"])));
+                    producto.IdProducto= (Convert.ToInt32(reader["idProducto"]));
+                    producto.Descripcion = reader["Descripcion"].ToString();
+                    producto.Precio = Convert.ToInt32(reader["Precio"]);
+                    presupuestoDetalle.CargarProducto(producto);
                     listaDetalle.Add(presupuestoDetalle);
                 }
             }
