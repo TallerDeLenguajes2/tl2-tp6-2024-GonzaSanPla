@@ -50,5 +50,9 @@ public class Presupuesto
     public void CargarDetallesPresupuesto(List<PresupuestoDetalle> presupuestoDetalles)
     {
         detalle=presupuestoDetalles;
+        foreach (var presupuestoDetalle in detalle)
+        {
+            presupuestoDetalle.IdPresupuesto=idPresupuesto;
+        }
     }
 }

@@ -22,14 +22,14 @@ public class PresupuestoRepository
         }
     }
 
-    public void CrearNuevoDetalle(int idPresupuesto, PresupuestoDetalle detalles)  // El idProducto mando como int o mando el producto o lo mando dentro de detalle? Se qchequea que el producto existe?
+    public void CrearNuevoDetalle(PresupuestoDetalle detalles)  // El idProducto mando como int o mando el producto o lo mando dentro de detalle? Se qchequea que el producto existe?
     {
         using (SqliteConnection connection = new SqliteConnection(cadenaConexion))
         {
             var query = "INSERT INTO PresupuestosDetalle (idPresupuesto, idProducto,Cantidad ) VALUES (@idPres,@idProd,@Cantidad)";
             connection.Open();
             var command = new SqliteCommand(query, connection);
-            command.Parameters.Add(new SqliteParameter("@idPres", idPresupuesto));
+            command.Parameters.Add(new SqliteParameter("@idPres", detalles.IdPresupuesto));
             command.Parameters.Add(new SqliteParameter("@idProd", detalles.Producto.IdProducto));
             command.Parameters.Add(new SqliteParameter("@Cantidad", detalles.Cantidad));
             command.ExecuteNonQuery();
