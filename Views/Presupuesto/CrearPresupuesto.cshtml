@@ -1,0 +1,16 @@
+@{
+    ViewData["Title"] = "CrearPresupuesto";
+}
+
+@model espacioPresupuestos.Presupuesto
+
+<form asp-controller="Presupuesto" asp-action="CrearPresupuesto">
+  <div class="mb-3">
+    <label asp-for=@Model.NombreDestinatario class="form-label">Nombre destinatario</label>
+    <input asp-for=@Model.NombreDestinatario type="text" class="form-control">
+    @* Como poner Fecha actual? *@
+    <label asp-for=@Model.FechaCreacion class="form-label">Fecha creación</label>
+    <input asp-for=@Model.FechaCreacion type="date" class="form-control">
+  </div>    
+  <button type="submit" class="btn btn-outline-success">Crear</button>
+</form>

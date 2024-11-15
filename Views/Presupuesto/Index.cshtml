@@ -14,6 +14,7 @@
       <th scope="col">ID</th>
       <th scope="col">Nombre destinatario</th>
       <th scope="col">Fecha de creación</th>
+      <th scope="col">Monto total</th>
       <th></th>
       <th></th>
     </tr>
@@ -26,6 +27,7 @@
             <th scope="row">@presupuesto.IdPresupuesto</th>
             <td>@presupuesto.NombreDestinatario</td>
             <td>@presupuesto.FechaCreacion</td>
+            <td>$@presupuesto.MontoPresupuestoConIVA()</td>
             @* <td><button type="button" class="btn btn-primary"><a class="nav-link text-light" asp-area="" asp-controller="Producto" asp-action="ModificarProducto" asp-route-id="@producto.IdProducto">Modificar</a></button></td>
             <td><button type="button" class="btn btn-danger"><a class="nav-link text-light" asp-area="" asp-controller="Producto" asp-action="EliminarProducto" asp-route-id="@producto.IdProducto">Eliminar</a></button></td> *@
         </tr>
@@ -33,5 +35,5 @@
   </tbody>
 </table>
 <div class="text-center">
-    <button type="button" class="btn btn-success"><a   class="nav-link text-light" asp-area="" asp-controller="Producto" asp-action="CrearProducto">Agregar producto a la lista</a></button>
+    <button type="button" class="btn btn-success"><a   class="nav-link text-light" asp-area="" asp-controller="Presupuesto" asp-action="CrearPresupuesto">Agregar presupuesto a la lista</a></button>
 </div>

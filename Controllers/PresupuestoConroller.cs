@@ -22,5 +22,16 @@ public class PresupuestoController : Controller
     {
         return View(presupuestoRepository.ListarPresupuestos());
     }
+    [HttpGet]
+    public IActionResult CrearPresupuesto()
+    {
+        return View();
+    }
 
+    [HttpPost]
+    public IActionResult CrearPresupuesto(Presupuesto presupuesto)
+    {
+        presupuestoRepository.CrearNuevoPresupuesto(presupuesto);
+        return RedirectToAction("Index");
+    }
 }

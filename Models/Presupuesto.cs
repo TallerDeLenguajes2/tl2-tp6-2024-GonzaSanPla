@@ -11,7 +11,7 @@ public class Presupuesto
     private string? fechaCreacion;
     private List<PresupuestoDetalle> detalle;
 
-    const int IVA = 21;
+    const double IVA = 0.21;
     public int IdPresupuesto { get => idPresupuesto; set => idPresupuesto = value; }
     public string? NombreDestinatario { get => nombreDestinatario; set => nombreDestinatario = value; }
     public List<PresupuestoDetalle> Detalle { get => detalle; }
@@ -28,7 +28,7 @@ public class Presupuesto
         nuevoPresupuestoDetalle.Cantidad = cantidadProducto;
 
     }
-    public int MontoPresupuesto()
+    public double MontoPresupuesto()
     {
         int monto = 0;
         foreach (PresupuestoDetalle detalle in Detalle)
@@ -38,15 +38,9 @@ public class Presupuesto
 
         return monto;
     }
-    public int MontoPresupuestoConIVA()
+    public double MontoPresupuestoConIVA()
     {
-        int monto = 0;
-        foreach (PresupuestoDetalle detalle in Detalle)
-        {
-            monto += detalle.Producto.Precio * detalle.Cantidad * IVA;
-        }
-
-        return monto;
+        return MontoPresupuesto()*(1+IVA);
     }
 
     public int CantidadProductos()
