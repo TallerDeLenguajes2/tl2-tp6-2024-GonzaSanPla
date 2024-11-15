@@ -87,4 +87,42 @@ public class PresupuestoRepository
         }
         return listaDetalle;
     }
+    public Presupuesto ObtenerPresupuestoPorId(int id)
+    {
+        Presupuesto pres = new Presupuesto();
+        using (SqliteConnection connection = new SqliteConnection(cadenaConexion))
+        {
+            string query = "SELECT * FROM Presupuestos WHERE idPresupuesto=@id;";
+            SqliteCommand command = new SqliteCommand(query, connection);
+            connection.Open();
+            command.Parameters.Add(new SqliteParameter("@id", id));
+            using (SqliteDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    pres.IdPresupuesto = Convert.ToInt32(reader["idPresupuesto"]);
+                    pres.NombreDestinatario = reader["NombreDestinatario"].ToString();
+                    pres.FechaCreacion = reader["FechaCreacion"].ToString();
+                }
+
+            }
+            connection.Close();
+
+        }
+        return pres;
+    }
+     public void ModificarPresupuesto(int idModificar, Presupuesto nuevoPresupuesto)
+    {
+        using (SqliteConnection connection = new SqliteConnection(cadenaConexion))
+        {
+            var query = "UPDATE Presupuestos SET NombreDestinatario= @NombreDestinatario , FechaCreacion= @FechaCreacion WHERE idPresupuesto=@id ";
+            connection.Open();
+            var command = new SqliteCommand(query, connection);
+            command.Parameters.Add(new SqliteParameter("@NombreDestinatario", nuevoPresupuesto.NombreDestinatario));
+            command.Parameters.Add(new SqliteParameter("@FechaCreacion", nuevoPresupuesto.FechaCreacion));
+            command.Parameters.Add(new SqliteParameter("@id", idModificar));
+            command.ExecuteNonQuery();
+            connection.Close();
+        }
+    }
 }

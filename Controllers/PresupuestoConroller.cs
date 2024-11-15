@@ -34,4 +34,16 @@ public class PresupuestoController : Controller
         presupuestoRepository.CrearNuevoPresupuesto(presupuesto);
         return RedirectToAction("Index");
     }
+    [HttpGet]
+    public IActionResult ModificarPresupuesto(int id)
+    {
+        return View(presupuestoRepository.ObtenerPresupuestoPorId(id));
+    }
+
+    [HttpPost]
+    public IActionResult ModificarPresupuesto(int id, Presupuesto presupuesto)
+    {
+        presupuestoRepository.ModificarPresupuesto(id, presupuesto);
+        return RedirectToAction("Index");
+    }
 }

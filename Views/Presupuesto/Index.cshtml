@@ -28,8 +28,8 @@
             <td>@presupuesto.NombreDestinatario</td>
             <td>@presupuesto.FechaCreacion</td>
             <td>$@presupuesto.MontoPresupuestoConIVA()</td>
-            @* <td><button type="button" class="btn btn-primary"><a class="nav-link text-light" asp-area="" asp-controller="Producto" asp-action="ModificarProducto" asp-route-id="@producto.IdProducto">Modificar</a></button></td>
-            <td><button type="button" class="btn btn-danger"><a class="nav-link text-light" asp-area="" asp-controller="Producto" asp-action="EliminarProducto" asp-route-id="@producto.IdProducto">Eliminar</a></button></td> *@
+            <td><button type="button" class="btn btn-primary"><a class="nav-link text-light" asp-area="" asp-controller="Presupuesto" asp-action="ModificarPresupuesto" asp-route-id="@presupuesto.IdPresupuesto">Modificar</a></button></td>
+            @* <td><button type="button" class="btn btn-danger"><a class="nav-link text-light" asp-area="" asp-controller="Producto" asp-action="EliminarProducto" asp-route-id="@producto.IdProducto">Eliminar</a></button></td> *@
         </tr>
     }
   </tbody>
