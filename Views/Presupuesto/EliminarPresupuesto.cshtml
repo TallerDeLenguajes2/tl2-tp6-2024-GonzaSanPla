@@ -1,0 +1,31 @@
+@{
+  ViewData["Title"] = "EliminarPresupuesto";
+
+}
+
+@model espacioPresupuestos.Presupuesto
+
+<div class="text-center">
+  <h2>¿Seguro que desea eliminar el siguiente presupuesto?</h2>
+</div>
+<table class="table table-danger">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Nombre destinatario</th>
+      <th scope="col">Fecha de creación</th>
+      <th scope="col">Monto total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">@Model.IdPresupuesto</th>
+      <td>@Model.NombreDestinatario</td>
+      <td>@Model.FechaCreacion</td>
+      <td>$@Model.MontoPresupuestoConIVA()</td>
+    </tr>
+  </tbody>
+</table>
+
+<button type="button" class="btn btn-success"><a class="nav-link text-light" asp-area="" asp-controller="Presupuesto" asp-action="ConfirmarEliminacion" asp-route-id="@Model.IdPresupuesto">Confirmar</a></button> 
+<button type="button" class="btn btn-danger"><a class="nav-link text-light" asp-area="" asp-controller="Presupuesto" asp-action="Index">Denegar</a></button>

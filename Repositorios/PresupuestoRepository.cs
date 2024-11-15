@@ -125,4 +125,21 @@ public class PresupuestoRepository
             connection.Close();
         }
     }
+       public void EliminarPresupuesto(int idEliminar)
+    {
+        using (SqliteConnection connection = new SqliteConnection(cadenaConexion))
+        {
+            string query = "DELETE FROM PresupuestosDetalle WHERE idPresupuesto=@id"; //Para eliminar de presupuesto detalle y no quede el id vacio
+            connection.Open();
+            var command = new SqliteCommand(query, connection);
+            command.Parameters.Add(new SqliteParameter("@id", idEliminar));
+            command.ExecuteNonQuery();
+            query = "DELETE FROM Presupuestos WHERE idPresupuesto=@id";   //Para eliminar el Presupuesto
+            connection.Open();
+            command = new SqliteCommand(query, connection);
+            command.Parameters.Add(new SqliteParameter("@id", idEliminar));
+            command.ExecuteNonQuery();
+            connection.Close();
+        }
+    }
 }
