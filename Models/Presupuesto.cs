@@ -1,5 +1,6 @@
 using espacioPresupuestosDetalle;
 using espacioProducto;
+using espacioCliente;
 using System.Linq;
 
 namespace espacioPresupuestos;
@@ -7,15 +8,17 @@ namespace espacioPresupuestos;
 public class Presupuesto
 {
     private int idPresupuesto;
-    private string? nombreDestinatario;
+    // private string? nombreDestinatario;
+    private Cliente cliente;
     private string? fechaCreacion;
     private List<PresupuestoDetalle> detalle;
 
     const double IVA = 0.21;
     public int IdPresupuesto { get => idPresupuesto; set => idPresupuesto = value; }
-    public string? NombreDestinatario { get => nombreDestinatario; set => nombreDestinatario = value; }
+    // public string? NombreDestinatario { get => nombreDestinatario; set => nombreDestinatario = value; }
     public List<PresupuestoDetalle> Detalle { get => detalle; }
     public string? FechaCreacion { get => fechaCreacion; set => fechaCreacion = value; }
+    public Cliente Cliente { get => cliente; set => cliente = value; }
 
     public Presupuesto()
     {

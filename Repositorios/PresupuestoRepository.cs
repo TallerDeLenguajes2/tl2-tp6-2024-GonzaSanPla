@@ -2,6 +2,7 @@ using espacioPresupuestos;
 using espacioPresupuestosDetalle;
 using espacioProducto;
 using espacioProductoRepository;
+using espacioClienteRepository;
 using Microsoft.Data.Sqlite;
 
 namespace espacioPresupuestoRepository;
@@ -12,10 +13,10 @@ public class PresupuestoRepository
     {
         using (SqliteConnection connection = new SqliteConnection(cadenaConexion))
         {
-            var query = "INSERT INTO Presupuestos (NombreDestinatario, FechaCreacion) VALUES (@Nombre, @Fecha)";
+            var query = "INSERT INTO Presupuestos (ClienteId, FechaCreacion) VALUES (@CliId, @Fecha)";
             connection.Open();
             var command = new SqliteCommand(query, connection);
-            command.Parameters.Add(new SqliteParameter("@Nombre", pres.NombreDestinatario));
+            command.Parameters.Add(new SqliteParameter("@CliId", pres.Cliente.ClienteId));
             command.Parameters.Add(new SqliteParameter("@Fecha", pres.FechaCreacion));
             command.ExecuteNonQuery();
             connection.Close();
@@ -42,6 +43,7 @@ public class PresupuestoRepository
         using (SqliteConnection connection = new SqliteConnection(cadenaConexion))
         {
             string query = "SELECT * FROM Presupuestos;";
+            var clienteRepository=  new ClienteRepository();
             SqliteCommand command = new SqliteCommand(query, connection);
             connection.Open();
             using (SqliteDataReader reader = command.ExecuteReader())
@@ -50,7 +52,7 @@ public class PresupuestoRepository
                 {
                     var presupuesto = new Presupuesto();
                     presupuesto.IdPresupuesto = Convert.ToInt32(reader["idPresupuesto"]);
-                    presupuesto.NombreDestinatario = reader["NombreDestinatario"].ToString();
+                    presupuesto.Cliente = clienteRepository.ObetnerClientePorId(Convert.ToInt32(reader["ClienteId"]));
                     presupuesto.FechaCreacion = reader["FechaCreacion"].ToString();
                     presupuesto.CargarDetallesPresupuesto(ListarDetallePresupuesto(Convert.ToInt32(reader["idPresupuesto"])));
                     listaPres.Add(presupuesto);
@@ -98,6 +100,7 @@ public class PresupuestoRepository
         {
             string query = "SELECT * FROM Presupuestos WHERE idPresupuesto=@id;";
             SqliteCommand command = new SqliteCommand(query, connection);
+            var clienteRepository=  new ClienteRepository();
             connection.Open();
             command.Parameters.Add(new SqliteParameter("@id", id));
             using (SqliteDataReader reader = command.ExecuteReader())
@@ -105,7 +108,7 @@ public class PresupuestoRepository
                 while (reader.Read())
                 {
                     pres.IdPresupuesto = Convert.ToInt32(reader["idPresupuesto"]);
-                    pres.NombreDestinatario = reader["NombreDestinatario"].ToString();
+                    pres.Cliente = clienteRepository.ObetnerClientePorId(Convert.ToInt32(reader["ClienteId"]));
                     pres.FechaCreacion = reader["FechaCreacion"].ToString();
                 }
 
@@ -119,10 +122,10 @@ public class PresupuestoRepository
     {
         using (SqliteConnection connection = new SqliteConnection(cadenaConexion))
         {
-            var query = "UPDATE Presupuestos SET NombreDestinatario= @NombreDestinatario , FechaCreacion= @FechaCreacion WHERE idPresupuesto=@id ";
+            var query = "UPDATE Presupuestos SET ClienteId= @ClienteId , FechaCreacion= @FechaCreacion WHERE idPresupuesto=@id ";
             connection.Open();
             var command = new SqliteCommand(query, connection);
-            command.Parameters.Add(new SqliteParameter("@NombreDestinatario", nuevoPresupuesto.NombreDestinatario));
+            command.Parameters.Add(new SqliteParameter("@ClienteId", nuevoPresupuesto.Cliente.ClienteId));
             command.Parameters.Add(new SqliteParameter("@FechaCreacion", nuevoPresupuesto.FechaCreacion));
             command.Parameters.Add(new SqliteParameter("@id", idModificar));
             command.ExecuteNonQuery();
