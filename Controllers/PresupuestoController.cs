@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using SQLitePCL;
 using tl2_tp6_2024_GonzaSanPla.Models;
 using espacioPresupuestosDetalle;
+using espacioClienteRepository;
+using espacioPresupuestoViewModel;
 
 namespace tl2_tp6_2024_GonzaSanPla.Controllers;
 
@@ -16,7 +18,7 @@ public class PresupuestoController : Controller
     PresupuestoRepository presupuestoRepository = new PresupuestoRepository();
     ProductoRepository productoRepository = new ProductoRepository();
 
-
+    ClienteRepository clienteRepository= new ClienteRepository();
     public PresupuestoController(ILogger<HomeController> logger)
     {
         _logger = logger;
@@ -30,13 +32,15 @@ public class PresupuestoController : Controller
     [HttpGet]
     public IActionResult CrearPresupuesto()
     {
-        return View();
+        Presupuesto pres= new Presupuesto();
+        PresupuestoListaCliente viewPres= new PresupuestoListaCliente(pres,clienteRepository.ListarCliente());
+        return View( viewPres);
     }
 
     [HttpPost]
-    public IActionResult CrearPresupuesto(Presupuesto presupuesto)
+    public IActionResult CrearPresupuesto(PresupuestoListaCliente viewPresupuesto)
     {
-        presupuestoRepository.CrearNuevoPresupuesto(presupuesto);
+        presupuestoRepository.CrearNuevoPresupuesto(viewPresupuesto.Presupuesto);
         return RedirectToAction("Index");
     }
     [HttpGet]
