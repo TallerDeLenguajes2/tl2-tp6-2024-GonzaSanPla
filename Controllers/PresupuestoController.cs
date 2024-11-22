@@ -46,13 +46,15 @@ public class PresupuestoController : Controller
     [HttpGet]
     public IActionResult ModificarPresupuesto(int id)
     {
-        return View(presupuestoRepository.ObtenerPresupuestoPorId(id));
+        Presupuesto pres= presupuestoRepository.ObtenerPresupuestoPorId(id);
+        PresupuestoListaCliente viewPres= new PresupuestoListaCliente(pres,clienteRepository.ListarCliente());
+        return View(viewPres);
     }
 
     [HttpPost]
-    public IActionResult ModificarPresupuesto(int id, Presupuesto presupuesto)
+    public IActionResult ModificarPresupuesto(int id, PresupuestoListaCliente presupuestoView)
     {
-        presupuestoRepository.ModificarPresupuesto(id, presupuesto);
+        presupuestoRepository.ModificarPresupuesto(id, presupuestoView.Presupuesto);
         return RedirectToAction("Index");
     }
 
@@ -79,7 +81,8 @@ public class PresupuestoController : Controller
     {
         PresupuestoDetalle presupuestoDetalle=new PresupuestoDetalle();
         presupuestoDetalle.IdPresupuesto=id;
-        return View(presupuestoDetalle);
+        PresupuestoDetalleListaProducto viewPres= new PresupuestoDetalleListaProducto(presupuestoDetalle,productoRepository.ListarProductos());
+        return View(viewPres);
     }
 
     [HttpPost]

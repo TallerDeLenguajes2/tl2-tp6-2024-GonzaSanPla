@@ -2,15 +2,37 @@
     ViewData["Title"] = "AgregarProducto";
 }
 
-@model espacioPresupuestosDetalle.PresupuestoDetalle
+@model espacioPresupuestoViewModel.PresupuestoDetalleListaProducto
 
+<div class="text-center">
+    <h1 class="display-4">Listado de productos</h1>
+</div>
+<table class="table table-primary table-striped">
+    <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Descripcion</th>
+      <th scope="col">Precio</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach(var producto in Model.ListaProducto)
+    {
+        <tr>
+            <th scope="row">@producto.IdProducto</th>
+            <td>@producto.Descripcion</td>
+            <td>@producto.Precio</td>
+        </tr>
+    }
+  </tbody>
+</table>
 <form asp-controller="Presupuesto" asp-action="AgregarProducto">
   <div class="mb-3">
-    <input hidden asp-for="@Model.IdPresupuesto">
-    <label asp-for=@Model.Producto.IdProducto class="form-label">ID Producto</label>
-    <input asp-for=@Model.Producto.IdProducto type="number" class="form-control">
-    <label asp-for=@Model.Cantidad class="form-label">Cantidad</label>
-    <input asp-for=@Model.Cantidad type="number" class="form-control">
+    <input hidden asp-for="@Model.PresupuestoDetalle.IdPresupuesto">
+    <label asp-for=@Model.PresupuestoDetalle.Producto.IdProducto class="form-label">ID Producto</label>
+    <input asp-for=@Model.PresupuestoDetalle.Producto.IdProducto type="number" class="form-control">
+    <label asp-for=@Model.PresupuestoDetalle.Cantidad class="form-label">Cantidad</label>
+    <input asp-for=@Model.PresupuestoDetalle.Cantidad type="number" class="form-control">
   </div>    
   <button type="submit" class="btn btn-outline-success">Crear</button>
 </form>    

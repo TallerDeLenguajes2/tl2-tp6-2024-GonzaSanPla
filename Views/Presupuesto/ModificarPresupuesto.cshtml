@@ -2,14 +2,40 @@
     ViewData["Title"] = "ModificarPresupuesto";
 }
 
-@model espacioPresupuestos.Presupuesto
+@model espacioPresupuestoViewModel.PresupuestoListaCliente
+
+
+<div class="text-center">
+    <h1 class="display-4">Listado de clientes</h1>
+</div>
+<table class="table table-primary table-striped">
+    <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Email</th>
+      <th scope="col">Telefono</th>
+    </tr>
+  </thead>
+  <tbody> 
+    @foreach(var cliente in Model.ListaClientes)
+    {
+        <tr>
+            <th scope="row">@cliente.ClienteId</th>
+            <td>@cliente.Nombre</td>
+            <td>@cliente.Email</td>
+            <td>$@cliente.Telefono</td>
+        </tr>
+    }
+  </tbody>
+</table>
 
 <form asp-controller="Presupuesto" asp-action="ModificarPresupuesto">
   <div class="mb-3">
-    <label asp-for=@Model.Cliente.ClienteId class="form-label">Id cliente</label>
-    <input asp-for=@Model.Cliente.ClienteId type="number" class="form-control">
-    <label asp-for=@Model.FechaCreacion class="form-label">FechaCreacion</label>
-    <input asp-for=@Model.FechaCreacion type="date" class="form-control">
+    <label asp-for=@Model.Presupuesto.Cliente.ClienteId class="form-label">Id cliente</label>
+    <input asp-for=@Model.Presupuesto.Cliente.ClienteId type="number" class="form-control">
+    <label asp-for=@Model.Presupuesto.FechaCreacion class="form-label">FechaCreacion</label>
+    <input asp-for=@Model.Presupuesto.FechaCreacion type="date" class="form-control">
   </div>    
   <button type="submit" class="btn btn-outline-success">Actualizar</button>
 </form>
